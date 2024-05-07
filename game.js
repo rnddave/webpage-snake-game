@@ -87,9 +87,18 @@ document.addEventListener('keydown', event => {
 });
 
 // Game loop
-function gameLoop() {
-    drawGame();
-    updateGame();
+let lastFrameTime = 0;
+const frameDelay = 150; // Adjust this value to control the snake's speed (higher value = slower speed)
+
+function gameLoop(currentTime) {
+    const timeSinceLastFrame = currentTime - lastFrameTime;
+
+    if (timeSinceLastFrame >= frameDelay) {
+        lastFrameTime = currentTime;
+        drawGame();
+        updateGame();
+    }
+
     requestAnimationFrame(gameLoop);
 }
 
