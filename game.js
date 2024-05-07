@@ -15,6 +15,7 @@ let snake = [
 let food = { x: 200, y: 200 };
 let direction = 'right';
 let score = 0;
+let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
 // Draw the game elements
 function drawGame() {
@@ -67,8 +68,7 @@ function updateGame() {
         head.y < 0 || head.y >= canvas.height ||
         snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
     ) {
-        alert(`Game Over! Your score: ${score}`);
-        location.reload();
+        gameOver();
     }
 }
 
@@ -86,6 +86,36 @@ document.addEventListener('keydown', event => {
     }
 });
 
+// Game over function
+function gameOver() {
+    const gameOverMessage = `Game Over! Your score: ${score}`;
+    alert(gameOverMessage);
+
+    // Save high score
+    const playerName = prompt('Enter your name for the high score list:');
+    if (playerName) {
+        highScores.push({ name: playerName, score: score });
+        highScores.sort((a, b) => b.score - a.score);
+        highScores = highScores.slice(0, 10); // Keep only the top 10 scores
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+        updateHighScoresList();
+    }
+
+    location.reload();
+}
+
+// Update the high scores list
+function updateHighScoresList() {
+    const highScoresList = document.getElementById('high-scores-list');
+    highScoresList.innerHTML = '';
+
+    highScores.forEach((entry, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${index + 1}. ${entry.name} - ${entry.score}`;
+        highScoresList.appendChild(listItem);
+    });
+}
+
 // Game loop
 let lastFrameTime = 0;
 const frameDelay = 150; // Adjust this value to control the snake's speed (higher value = slower speed)
@@ -101,6 +131,9 @@ function gameLoop(currentTime) {
 
     requestAnimationFrame(gameLoop);
 }
+
+// Initialize the high scores list
+updateHighScoresList();
 
 // Start the game loop
 gameLoop();
