@@ -3,8 +3,8 @@ const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
 // Set the canvas dimensions
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = 800;
+canvas.height = 600;
 
 // Define game variables
 let snake = [
