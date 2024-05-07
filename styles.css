@@ -11,6 +11,12 @@ body {
 
 #game-container {
     text-align: center;
+    max-width: 800px;
+    padding: 20px;
+}
+
+#intro {
+    margin-bottom: 20px;
 }
 
 #game-canvas {
@@ -21,4 +27,14 @@ body {
 #score-container {
     margin-top: 10px;
     font-size: 18px;
+}
+
+#high-scores-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#high-scores-list {
+    list-style-type: decimal;
+    padding-left: 20px;
 }
