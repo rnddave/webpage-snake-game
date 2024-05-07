@@ -8,11 +8,11 @@ canvas.height = 600;
 
 // Define game variables
 let snake = [
-    { x: 200, y: 200 },
-    { x: 190, y: 200 },
-    { x: 180, y: 200 }
+    { x: 400, y: 300 },
+    { x: 390, y: 300 },
+    { x: 380, y: 300 }
 ];
-let food = { x: 100, y: 100 };
+let food = { x: 200, y: 200 };
 let direction = 'right';
 let score = 0;
 
@@ -56,7 +56,7 @@ function updateGame() {
     if (head.x === food.x && head.y === food.y) {
         score += 10;
         document.getElementById('score').textContent = score;
-        food = { x: Math.floor(Math.random() * 39) * 10, y: Math.floor(Math.random() * 39) * 10 };
+        food = { x: Math.floor(Math.random() * 79) * 10, y: Math.floor(Math.random() * 59) * 10 };
     } else {
         snake.pop();
     }
